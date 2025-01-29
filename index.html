@@ -173,11 +173,29 @@
                 });
             });
             [tmdb, season, episode, embed].forEach(input => {
-                input.addEventListener('change', () => {
-                    let base = 'https://afn-api.vercel.app/embed', type = inputs.getAttribute('type');
-                    if (type == 'movie') embed.value = `${base}/${type}/${tmdb.value}`;
-                    else embed.value = `${base}/${type}/${tmdb.value}/${season.value}/${episode.value}`;
-                    return $('iframe').src = embed.value;
+                input.addEventListener('change', async () => {
+                    let base = 'https://api-kappa-pink-74.vercel.app/embed', type = inputs.getAttribute('type');
+                    let apiUrl;
+                    if (type == 'movie') apiUrl = `${base}/${type}/${tmdb.value}`;
+                    else apiUrl = `${base}/${type}/${tmdb.value}/${season.value}/${episode.value}`;
+
+                    // Display loading message
+                    embed.value = "Loading...";
+
+                    try {
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) {
+                        throw new Error('API request failed');
+                    }
+                    const data = await response.json();
+
+                    // Redirect to the embed URL
+                    window.location.href = data.embed_url;
+                    } catch (error) {
+                    console.error('Error fetching embed URL:', error);
+                    // Display error message
+                    embed.value = "Error: Could not load movie.";
+                    }
                 });
             });
         </script>

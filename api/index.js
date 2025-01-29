@@ -1,7 +1,11 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import cors from 'cors';
 
 const app = express();
+
+// Enable CORS for all origins
+app.use(cors());
 
 app.get('/embed/movie/:tmdb_id', async (req, res) => {
   const tmdbId = req.params.tmdb_id;
