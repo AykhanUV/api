@@ -15,10 +15,8 @@ app.get('/embed/movie/:tmdb_id', async (req, res) => {
     if (!response.ok) {
       throw new Error(`7xtream API error: ${response.status}`);
     }
-    res.json({
-      message: `Movie embed URL for TMDB ID: ${tmdbId}`,
-      embed_url: embedUrl
-    });
+    // Server-side redirect to the 7xtream embed URL
+    res.redirect(302, embedUrl);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch movie embed URL' });
@@ -35,10 +33,8 @@ app.get('/embed/tv/:tmdb_id/:season_number/:episode_number', async (req, res) =>
     if (!response.ok) {
       throw new Error(`7xtream API error: ${response.status}`);
     }
-    res.json({
-      message: `TV show embed URL for TMDB ID: ${tmdbId}, Season: ${seasonNumber}, Episode: ${episodeNumber}`,
-      embed_url: embedUrl
-    });
+    // Server-side redirect to the 7xtream embed URL
+    res.redirect(302, embedUrl);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch TV show embed URL' });
