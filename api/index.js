@@ -1,5 +1,6 @@
-const express = require('express');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+import express from 'express';
+import fetch from 'node-fetch';
+
 const app = express();
 
 app.get('/embed/movie/:tmdb_id', async (req, res) => {
@@ -62,4 +63,4 @@ app.get('/', (req, res) => {
   res.send('AFN API - Movie Streaming API');
 });
 
-module.exports = app;
+export default app;
