@@ -1,0 +1,11 @@
+{
+  "name": "afn-api",
+  "version": "1.0.0",
+  "description": "API for movie and series streaming",
+  "scripts": {
+    "start": "node api/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
